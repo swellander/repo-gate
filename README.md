@@ -66,16 +66,12 @@
 
 When a repo admin installs Repo Gate as a Github App on their repo, the bot will immediately add a custom link to the project Readme. When a prospective user visits the repo, they can click the `Get Collab Invite` link and be prompted to sign a message, proving they own some [SPORK Token](https://polygonscan.com/token/0x9ca6a77c8b38159fd2da9bd25bc3e259c33f5e39). If the user does own the token, they will be automatically invited as a collaborator with `write` access to the repo.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Built With
 
 - [![Scaffold Eth 2][Scaffold-Eth-2]][SE2-url]
 - [![Next][Next.js]][Next-url]
 - [![React][React.js]][React-url]
 - [![Tailwind CSS][TailwindCSS]][TailwindCSS-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Installation
 
@@ -120,8 +116,6 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ``` -->
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ROADMAP -->
 
 ## Roadmap
@@ -133,7 +127,7 @@ _Below is an example of how you can instruct your audience on installing and set
 - [ ] Add support for ERC-1155
 - [ ] Keep collaborator access in sync with token balance
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
+  -->
 
 <!-- CONTRIBUTING -->
 
@@ -150,15 +144,11 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- LICENSE -->
 
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 
@@ -166,15 +156,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Sam Wellander - [@websurfer.eth](https://warpcast.com/websurfer.eth)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
 
 Many thanks to [the Buidl Guidl](https://buidlguidl.com/) and the amazing [Scaffold-Eth-2](https://github.com/scaffold-eth/scaffold-eth-2) template that forms the base of this repo!
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -198,7 +184,3 @@ Many thanks to [the Buidl Guidl](https://buidlguidl.com/) and the amazing [Scaff
 [TailwindCSS-url]: https://tailwindcss.com/
 [Scaffold-Eth-2]: https://img.shields.io/badge/SE2-v.0.0.34-2
 [SE2-url]: https://github.com/scaffold-eth/scaffold-eth-2
-
-```
-
-```
