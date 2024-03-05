@@ -127,8 +127,6 @@ _Below is an example of how you can instruct your audience on installing and set
 - [ ] Add support for ERC-1155
 - [ ] Keep collaborator access in sync with token balance
 
-  -->
-
 <!-- CONTRIBUTING -->
 
 ## Contributing
