@@ -7,41 +7,6 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useSignMessage } from "wagmi";
 import { useAutoConnect } from "~~/hooks/scaffold-eth";
 
-const staticUser = {
-  login: "swellander",
-  id: 22231097,
-  node_id: "MDQ6VXNlcjIyMjMxMDk3",
-  avatar_url: "https://avatars.githubusercontent.com/u/22231097?v=4",
-  gravatar_id: "",
-  url: "https://api.github.com/users/swellander",
-  html_url: "https://github.com/swellander",
-  followers_url: "https://api.github.com/users/swellander/followers",
-  following_url: "https://api.github.com/users/swellander/following{/other_user}",
-  gists_url: "https://api.github.com/users/swellander/gists{/gist_id}",
-  starred_url: "https://api.github.com/users/swellander/starred{/owner}{/repo}",
-  subscriptions_url: "https://api.github.com/users/swellander/subscriptions",
-  organizations_url: "https://api.github.com/users/swellander/orgs",
-  repos_url: "https://api.github.com/users/swellander/repos",
-  events_url: "https://api.github.com/users/swellander/events{/privacy}",
-  received_events_url: "https://api.github.com/users/swellander/received_events",
-  type: "User",
-  site_admin: false,
-  name: "Sam Wellander",
-  company: "Simple Fractal",
-  blog: "",
-  location: "Seattle",
-  email: "samwellander@gmail.com",
-  hireable: null,
-  bio: null,
-  twitter_username: null,
-  public_repos: 131,
-  public_gists: 4,
-  followers: 27,
-  following: 61,
-  created_at: "2016-09-16T04:46:47Z",
-  updated_at: "2024-03-04T19:09:31Z",
-};
-
 interface Props {
   installationId: string;
   repoName: string;
@@ -52,6 +17,7 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
   useAutoConnect();
   const [errorMsg, setErrorMsg] = useState("");
   const [sendingInvite, setSendingInvite] = useState(false);
+  const [inviteSuccess, setInviteSuccess] = useState(false);
 
   const [ghUserData, setGHUserData] = useState<any>();
   const [accessToken, setAccessToken] = useState("");
@@ -75,7 +41,8 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
         });
         setSendingInvite(false);
         if (res.status === 201) {
-          window.location.assign(`https://github.com/settings/organizations`);
+          setInviteSuccess(true);
+          window.location.assign(`https://github.com/${repoOwner}/${repoName}/invitations`);
         } else if (res.status === 404) setErrorMsg("Account does not own token. Try a different account?");
         else {
           setErrorMsg("Something went wrong.");
@@ -140,7 +107,7 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
       }}
     >
       <div className="flex flex-col items-center">
-        {ghUserData && (
+        {ghUserData ? (
           <>
             <Image
               src={ghUserData.avatar_url}
@@ -150,7 +117,7 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
               className="rounded-full mb-5"
             />
             <h1>{ghUserData?.login}</h1>
-            <button className="btn btn-accent" onClick={sign}>
+            <button className="btn btn-primary" onClick={sign} disabled={inviteSuccess || waitingForSignature}>
               {waitingForSignature ? (
                 <span className="flex items-center">
                   Waiting for signature
@@ -163,6 +130,8 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
                   Sending invite
                   <span className="loading loading-spinner ml-2" />
                 </span>
+              ) : inviteSuccess ? (
+                <span>Invite sent!</span>
               ) : (
                 <span>Get invite to {repoName} repo</span>
               )}
@@ -186,6 +155,8 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
               </div>
             )}
           </>
+        ) : (
+          <span className="loading loading-spinner loading-lg" />
         )}
       </div>
     </div>

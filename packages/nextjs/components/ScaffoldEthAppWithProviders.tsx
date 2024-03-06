@@ -1,5 +1,6 @@
 "use client";
 
+import { Header } from "./Header";
 import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
 import { WagmiConfig } from "wagmi";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
@@ -18,6 +19,7 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
         avatar={BlockieAvatar}
         theme={isDarkMode ? darkTheme() : lightTheme()}
       >
+        <Header />
         {children}
       </RainbowKitProvider>
     </WagmiConfig>
