@@ -87,7 +87,7 @@ module.exports = (app, { getRouter }) => {
         "https://github.com/login/oauth/access_token",
         {
           client_id: process.env.GITHUB_OAUTH_CLIENT_ID,
-          client_secret: GITHUB_OAUTH_CLIENT_SECRET,
+          client_secret: process.env.GITHUB_OAUTH_CLIENT_SECRET,
           code: req.query.code,
         },
         {

@@ -123,6 +123,7 @@ _Below is an example of how you can instruct your audience on installing and set
 - [x] Handle SPORK Token
 - [ ] Make token address configurable
 - [ ] Make collaborator permissions configurable
+- [ ] Clean up UI
 - [ ] Add support for ERC-721
 - [ ] Add support for ERC-1155
 - [ ] Keep collaborator access in sync with token balance
