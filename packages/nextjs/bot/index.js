@@ -1,5 +1,5 @@
-module.exports = (app) => {
-  app.on("installation_repositories", async (context) => {
+module.exports = app => {
+  app.on("installation_repositories", async context => {
     for (const addedRepo of context.payload.repositories_added) {
       const [owner, repo] = addedRepo.full_name.split("/");
 
@@ -14,22 +14,16 @@ module.exports = (app) => {
         if (error.status === 404) {
           existingReadme = null;
         } else {
-          console.error(
-            `Error retrieving README.md for ${owner}/${repo}:`,
-            error
-          );
+          console.error(`Error retrieving README.md for ${owner}/${repo}:`, error);
           continue;
         }
       }
 
-      const generatedInviteLink = `${process.env.FRONTEND_HOST}?owner=${owner}&repo=${repo}&installation_id=${context.payload.installation.id}`;
+      const generatedInviteLink = `https://${process.env.VERCEL_URL}?owner=${owner}&repo=${repo}&installation_id=${context.payload.installation.id}`;
 
       let newContent;
       if (existingReadme) {
-        const existingContent = Buffer.from(
-          existingReadme.data.content,
-          "base64"
-        ).toString();
+        const existingContent = Buffer.from(existingReadme.data.content, "base64").toString();
         newContent = `${existingContent}\n\n# [Get Collab Invite](${generatedInviteLink})`;
       } else {
         newContent = `# [Get Collab Invite](${generatedInviteLink})`;
@@ -53,16 +47,9 @@ module.exports = (app) => {
           committer,
           sha: existingReadme ? existingReadme.data.sha : undefined,
         });
-        console.log(
-          `${
-            existingReadme ? "Updated" : "Created"
-          } readme for ${owner}/${repo}`
-        );
+        console.log(`${existingReadme ? "Updated" : "Created"} readme for ${owner}/${repo}`);
       } catch (error) {
-        console.error(
-          `Error updating/creating README.md for ${owner}/${repo}:`,
-          error
-        );
+        console.error(`Error updating/creating README.md for ${owner}/${repo}:`, error);
       }
     }
   });

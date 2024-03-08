@@ -5,9 +5,9 @@ import GetSignature from "~~/components/GetSignature";
 
 export const App = () => {
   const searchParams = useSearchParams();
-  const installationId = searchParams.get("installation_id");
-  const repoName = searchParams.get("repo");
-  const repoOwner = searchParams.get("owner");
+  const installationId = searchParams?.get("installation_id");
+  const repoName = searchParams?.get("repo");
+  const repoOwner = searchParams?.get("owner");
 
   if (!installationId || !repoName || !repoOwner) {
     return (

@@ -1,5 +1,11 @@
+import { Address } from "viem";
+import { client } from "~~/services/web3/client";
+import erc20ABI from "~~/services/web3/erc20ABI.json";
+
+const tokenAddress = process.env.TOKEN_ADDRESS || "";
+
 export const requestToken = async (code: string) => {
-  const tokenUrl = `http://${process.env.NEXT_PUBLIC_PROXY_SERVER_HOST}/token-gate/token?code=${code}`;
+  const tokenUrl = `/api/github-token?code=${code}`;
   const res = await fetch(tokenUrl);
   const data = await res.json();
   return data.access_token;
@@ -29,7 +35,7 @@ export const requestRepoInvite = async ({
   repoName: string;
   repoOwner: string;
 }) => {
-  const inviteUrl = `http://${process.env.NEXT_PUBLIC_PROXY_SERVER_HOST}/token-gate/invite`;
+  const inviteUrl = `/api/invite`;
   const options = {
     method: "POST",
     headers: {
@@ -45,4 +51,25 @@ export const requestRepoInvite = async ({
   };
   const res = await fetch(inviteUrl, options);
   return res;
+};
+
+export const fetchGithubUserWithAccessToken = async (token: string) => {
+  const res = await fetch("https://api.github.com/user", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    },
+    method: "GET",
+  });
+  return res.json();
+};
+
+export const addressOwnsAnyAmountOfToken = async (address: Address) => {
+  const balance = await client.readContract({
+    address: tokenAddress,
+    abi: erc20ABI,
+    functionName: "balanceOf",
+    args: [address],
+  });
+  return (balance as bigint) > 0n;
 };

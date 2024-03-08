@@ -67,7 +67,7 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
   const redirectToGithubLogin = useCallback(() => {
     const redirecUri = getRedirectUri();
     const params = new URLSearchParams();
-    params.append("client_id", process.env.NEXT_PUBLIC_CLIENT_ID || "");
+    params.append("client_id", process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || "");
     params.append("redirect_uri", redirecUri);
     window.location.assign(`https://github.com/login/oauth/authorize?${params.toString()}`);
   }, [getRedirectUri]);
@@ -77,6 +77,7 @@ const GetSignature = ({ installationId, repoName, repoOwner }: Props) => {
     const urlParams = new URLSearchParams(queryString);
     const code = urlParams.get("code");
     const getToken = async () => {
+      console.log("requesting GH Access Token");
       const accessToken = await requestToken(code || "");
       if (accessToken) setAccessToken(accessToken);
     };
