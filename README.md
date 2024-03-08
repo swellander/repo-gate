@@ -77,7 +77,7 @@ When a repo admin installs Repo Gate as a Github App on their repo, the bot will
 
 To use the Repo Gate app, it will need to installed as a GitHub App on all the repositories you wish to gate.
 
-[Install Github app](https://github.com/apps/repo-token-gate)
+[Install Github app](https://github.com/apps/repo-gate)
 
 ## Usage
 
