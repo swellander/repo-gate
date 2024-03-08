@@ -19,7 +19,7 @@ module.exports = app => {
         }
       }
 
-      const generatedInviteLink = `https://${process.env.VERCEL_URL}?owner=${owner}&repo=${repo}&installation_id=${context.payload.installation.id}`;
+      const generatedInviteLink = `https://repogate.vercel.app?owner=${owner}&repo=${repo}&installation_id=${context.payload.installation.id}`;
 
       let newContent;
       if (existingReadme) {
