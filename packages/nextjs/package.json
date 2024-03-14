@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev & probot run ./bot",
+    "dev": "next dev & yarn probot",
     "start": "next dev",
     "build": "next build",
     "serve": "next start",
@@ -11,7 +11,8 @@
     "format": "prettier --write . '!(node_modules|.next|contracts)/**/*'",
     "check-types": "tsc --noEmit --incremental",
     "vercel": "vercel",
-    "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true"
+    "vercel:yolo": "vercel --build-env NEXT_PUBLIC_IGNORE_BUILD_ERROR=true",
+    "probot": "probot run ./bot"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
@@ -33,6 +34,7 @@
     "usehooks-ts": "^2.7.2",
     "viem": "1.19.9",
     "wagmi": "1.4.12",
+    "yaml": "^2.4.1",
     "zustand": "^4.1.2"
   },
   "devDependencies": {
