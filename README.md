@@ -73,6 +73,7 @@ After installing the app on a repo, a commit will automatically be made to the r
 - [ ] Add support for ERC-721
 - [ ] Add support for ERC-1155
 - [ ] Keep collaborator access in sync with token balance
+- [ ] Refactor to get `repo` and `owner` from `installation_id`
 
 ## Contributing
 
