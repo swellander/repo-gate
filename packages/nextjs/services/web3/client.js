@@ -1,7 +1,13 @@
 import { createPublicClient, http } from "viem";
-import { polygon } from "viem/chains";
+import { arbitrum, base, mainnet, optimism, polygon } from "viem/chains";
 
-export const client = createPublicClient({
-  chain: polygon,
-  transport: http(),
-});
+const supportedChains = [arbitrum, base, mainnet, optimism, polygon];
+
+export const getClient = id => {
+  const chain = supportedChains.find(c => c.id === id);
+  const client = createPublicClient({
+    chain,
+    transport: http(),
+  });
+  return client;
+};

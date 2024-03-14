@@ -1,8 +1,6 @@
 import { Address } from "viem";
-import { client } from "~~/services/web3/client";
+import { getClient } from "~~/services/web3/client";
 import erc20ABI from "~~/services/web3/erc20ABI.json";
-
-const tokenAddress = process.env.TOKEN_ADDRESS || "";
 
 export const requestToken = async (code: string) => {
   const tokenUrl = `/api/github-token?code=${code}`;
@@ -64,12 +62,21 @@ export const fetchGithubUserWithAccessToken = async (token: string) => {
   return res.json();
 };
 
-export const addressOwnsAnyAmountOfToken = async (address: Address) => {
+export const addressOwnsAnyAmountOfToken = async ({
+  owner,
+  tokenAddress,
+  chainId,
+}: {
+  owner: Address;
+  tokenAddress: Address;
+  chainId: number;
+}) => {
+  const client = getClient(chainId);
   const balance = await client.readContract({
     address: tokenAddress,
     abi: erc20ABI,
     functionName: "balanceOf",
-    args: [address],
+    args: [owner],
   });
   return (balance as bigint) > 0n;
 };
