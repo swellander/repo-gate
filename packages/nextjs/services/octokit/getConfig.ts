@@ -18,16 +18,16 @@ export const fetchConfig = async ({
       path: ".github/config.yml",
     });
 
+    // @ts-ignore:
     const content = Buffer.from(response.data.content, response.data.encoding).toString();
 
     try {
-      const { repoGate: config }= parse(content);
+      const { repoGate: config } = parse(content);
       if (!config) throw new Error(".github/config.yml is invalid");
-      return config
-    } catch(err) {
+      return config;
+    } catch (err) {
       throw new Error(".github/config.yml is invalid");
     }
-
   } catch (error) {
     console.error("Error fetching config file:", error);
     return null;
